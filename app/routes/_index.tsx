@@ -7,5 +7,5 @@ export const links: LinksFunction = () => [
 ];
 
 export default function IndexRoute() {
-  return <div>Art Shop</div>;
+  return <main></main>;
 }
