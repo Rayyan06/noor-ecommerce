@@ -9,10 +9,9 @@ import {
   isRouteErrorResponse,
 } from '@remix-run/react';
 
-import { cssBundleHref } from '@remix-run/css-bundle';
+import stylesUrl from '~/styles/tailwind.css';
 
-import stylesUrl from '~/styles/global.css';
-import Navbar from './components/navbar/navbar';
+import Navbar from './components/navbar';
 import { ReactNode } from 'react';
 
 export const meta: MetaFunction = () => {
@@ -25,7 +24,6 @@ export const meta: MetaFunction = () => {
 };
 
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
   { rel: 'stylesheet', href: stylesUrl },
 ];
 
@@ -43,7 +41,7 @@ export function Layout({ children }: LayoutProps) {
         <header>
           <Navbar />
         </header>
-        {children}
+        <main>{children}</main>
         <ScrollRestoration />
         <LiveReload />
       </body>

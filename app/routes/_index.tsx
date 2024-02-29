@@ -1,11 +1,7 @@
-import type { LinksFunction } from '@remix-run/node';
-
-import stylesUrl from '~/styles/index.css';
-
-export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: stylesUrl },
-];
-
 export default function IndexRoute() {
-  return <main></main>;
+  return (
+    <>
+      <h1 className="text-3xl font-bold underline">Hello world</h1>
+    </>
+  );
 }
