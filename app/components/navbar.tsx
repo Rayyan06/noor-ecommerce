@@ -1,4 +1,5 @@
 import { Link } from '@remix-run/react';
+import { ShoppingCartOutlined, LoginOutlined } from '@mui/icons-material';
 
 export default function Navbar() {
   return (
@@ -33,11 +34,15 @@ export default function Navbar() {
 
         {/* Login & Cart */}
         <ul className="flex space-x-12">
-          <li>
+          <li className="space-x-1">
+            <LoginOutlined />
             <Link to="/login">Login</Link>
           </li>
-          <li>
-            <Link to="/cart">Cart</Link>
+          <li className="space-x-1">
+            <ShoppingCartOutlined />
+            <Link className="ml-1" to="/cart">
+              Cart
+            </Link>
           </li>
         </ul>
       </div>
