@@ -9,7 +9,7 @@ import {
   isRouteErrorResponse,
 } from '@remix-run/react';
 
-import stylesUrl from '~/styles/tailwind.css';
+import stylesheet from './tailwind.css';
 
 import Navbar from './components/navbar';
 import { ReactNode } from 'react';
@@ -24,7 +24,7 @@ export const meta: MetaFunction = () => {
 };
 
 export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: stylesUrl },
+  { rel: 'stylesheet', href: stylesheet },
 ];
 
 interface LayoutProps {
