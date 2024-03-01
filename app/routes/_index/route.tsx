@@ -1,6 +1,10 @@
-import { Outlet } from '@remix-run/react';
 import Card from './card';
 
 export default function IndexRoute() {
-  return <></>;
+  return (
+    <>
+      <Card mainText="Browse our latest products" buttonText="Shop Now" />
+      <Card mainText="View other products" buttonText="View now" />
+    </>
+  );
 }

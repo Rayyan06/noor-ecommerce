@@ -6,15 +6,15 @@ import {
   Meta,
   Scripts,
   ScrollRestoration,
-  useRouteError,
-  isRouteErrorResponse,
+  // useRouteError,
+  // isRouteErrorResponse,
 } from '@remix-run/react';
 
 import stylesheet from './tailwind.css';
 
 import Navbar from './components/navbar';
-import { ReactNode } from 'react';
-import type { PropsWithChildren } from 'react';
+// import { ReactNode } from 'react';
+// import type { PropsWithChildren } from 'react';
 
 export const meta: MetaFunction = () => {
   return [
@@ -29,7 +29,25 @@ export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: stylesheet },
 ];
 
-export function Layout({ children }: PropsWithChildren) {
+// export function Layout({ children }: PropsWithChildren) {
+//   return (
+//     <html lang="en">
+//       <head>
+//         <Meta />
+//         <Links />
+//       </head>
+//       <body>
+//         <header>
+//           <Navbar />
+//         </header>
+//         {children}
+//         <ScrollRestoration />
+//         <LiveReload />
+//       </body>
+//     </html>
+//   );
+// }
+export default function App() {
   return (
     <html lang="en">
       <head>
@@ -40,39 +58,37 @@ export function Layout({ children }: PropsWithChildren) {
         <header>
           <Navbar />
         </header>
-        {children}
+        <Outlet />
         <ScrollRestoration />
+        <Scripts />
         <LiveReload />
       </body>
     </html>
   );
 }
-export default function App() {
-  return <Outlet />;
-}
 
-export function ErrorBoundary() {
-  const error = useRouteError();
+// export function ErrorBoundary() {
+//   const error = useRouteError();
 
-  if (isRouteErrorResponse(error)) {
-    return (
-      <>
-        <h1>
-          {error.status} {error.statusText}
-        </h1>
-        <p>{error.data}</p>
-      </>
-    );
-  } else if (error instanceof Error) {
-    return (
-      <>
-        <h1>Error</h1>
-        <p>{error.message}</p>
-        <p>The stack trace is:</p>
-        <pre>{error.stack}</pre>
-      </>
-    );
-  } else {
-    return <h1>Unknown Error</h1>;
-  }
-}
+//   if (isRouteErrorResponse(error)) {
+//     return (
+//       <>
+//         <h1>
+//           {error.status} {error.statusText}
+//         </h1>
+//         <p>{error.data}</p>
+//       </>
+//     );
+//   } else if (error instanceof Error) {
+//     return (
+//       <>
+//         <h1>Error</h1>
+//         <p>{error.message}</p>
+//         <p>The stack trace is:</p>
+//         <pre>{error.stack}</pre>
+//       </>
+//     );
+//   } else {
+//     return <h1>Unknown Error</h1>;
+//   }
+// }

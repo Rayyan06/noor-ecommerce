@@ -5,11 +5,11 @@ import ShoppingCartOutlined from './icons/ShoppingCartOutlined';
 import Menu from './icons/Menu';
 
 export default function Navbar() {
-  // const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
-  // const toggleMenu = () => {
-  //   setIsCollapsed(!isCollapsed);
-  // };
+  const toggleMenu = () => {
+    setIsCollapsed(!isCollapsed);
+  };
 
   return (
     <nav className="bg-gray-100 py-4">
@@ -19,17 +19,16 @@ export default function Navbar() {
           NoorHadiaArts
         </Link>
 
-        {/* <div className="block lg:hidden">
+        <div className="block lg:hidden">
           <button onClick={toggleMenu} className="text-white">
             <Menu />
           </button>
-        </div> */}
+        </div>
         {/* Navigation links */}
         <ul
-          className="flex space-x-12"
-          // className={`hidden lg:flex space-x-12 ${
-          //   isCollapsed ? 'block' : 'hidden'
-          // }`}
+          className={`hidden lg:flex space-x-12 ${
+            isCollapsed ? 'block' : 'hidden'
+          }`}
         >
           <li>
             <Link to="/">Home</Link>
@@ -52,7 +51,7 @@ export default function Navbar() {
         </ul>
 
         {/* Mobile Menu */}
-        {/* <ul
+        <ul
           className={`lg:hidden ${isCollapsed ? 'hidden' : 'block'} space-x-12`}
         >
           <li className="block py-2">
@@ -74,9 +73,9 @@ export default function Navbar() {
             </Link>
           </li>
         </ul>
-        */}
+
         {/* Login & Cart */}
-        <ul className="lg:flex space-x-12">
+        <ul className="hidden lg:flex space-x-12">
           <li className="space-x-1 flex">
             <Link className="flex" to="/login">
               <AccountCircle />
