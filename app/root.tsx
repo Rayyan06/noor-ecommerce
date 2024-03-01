@@ -13,6 +13,7 @@ import {
 import stylesheet from './tailwind.css';
 
 import Navbar from './components/navbar';
+import Footer from './components/footer';
 // import { ReactNode } from 'react';
 // import type { PropsWithChildren } from 'react';
 
@@ -62,6 +63,9 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        <footer>
+          <Footer />
+        </footer>
       </body>
     </html>
   );

@@ -1,8 +1,6 @@
-export default function Card({ mainText, buttonText, backgroundColor }) {
+export default function Card({ mainText, buttonText }) {
   return (
-    <section
-      className={`mx-auto overflow-hidden h-screen shadow-lg ${backgroundColor}`}
-    >
+    <section className={`mx-auto overflow-hidden h-screen shadow-lg`}>
       <div
         className="flex items-center bg-cover bg-center h-full"
         style={{
