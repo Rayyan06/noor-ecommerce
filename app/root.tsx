@@ -4,6 +4,7 @@ import {
   Outlet,
   Links,
   Meta,
+  Scripts,
   ScrollRestoration,
   useRouteError,
   isRouteErrorResponse,
@@ -13,6 +14,7 @@ import stylesheet from './tailwind.css';
 
 import Navbar from './components/navbar';
 import { ReactNode } from 'react';
+import type { PropsWithChildren } from 'react';
 
 export const meta: MetaFunction = () => {
   return [
@@ -27,10 +29,7 @@ export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: stylesheet },
 ];
 
-interface LayoutProps {
-  children: ReactNode;
-}
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <head>
@@ -41,7 +40,7 @@ export function Layout({ children }: LayoutProps) {
         <header>
           <Navbar />
         </header>
-        <main>{children}</main>
+        {children}
         <ScrollRestoration />
         <LiveReload />
       </body>
