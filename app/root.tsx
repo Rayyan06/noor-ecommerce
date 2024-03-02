@@ -59,7 +59,9 @@ export default function App() {
         <header>
           <Navbar />
         </header>
-        <Outlet />
+        <main className="h-screen">
+          <Outlet />
+        </main>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
