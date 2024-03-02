@@ -1,4 +1,9 @@
-export default function Card({ mainText, buttonText }) {
+type CardProps = {
+  mainText: string;
+  buttonText: string;
+};
+
+export default function Card({ mainText, buttonText }: CardProps) {
   return (
     <section className={`mx-auto overflow-hidden h-screen shadow-lg`}>
       <div

@@ -1,6 +1,6 @@
 import { Link } from '@remix-run/react';
 import { useState } from 'react';
-import AccountCircle from './icons/AccountCircle';
+// import AccountCircle from './icons/AccountCircle';
 import ShoppingCartOutlined from './icons/ShoppingCartOutlined';
 import Menu from './icons/Menu';
 import InstagramIcon from './icons/Instagram';
