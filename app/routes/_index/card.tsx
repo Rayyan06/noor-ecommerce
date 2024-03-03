@@ -5,17 +5,17 @@ type CardProps = {
 
 export default function Card({ mainText, buttonText }: CardProps) {
   return (
-    <section className={`mx-auto overflow-hidden h-screen shadow-lg`}>
+    <section className={`mx-auto h-screen shadow-lg`}>
       <div
-        className="flex items-center bg-cover bg-center h-full"
+        className="flex items-center bg-cover bg-center h-screen"
         style={{
           backgroundImage:
             'url("https://dummyimage.com/2000x700/969696/8c8c8c.jpg&text=Insert+Image+here")',
         }}
       >
         <div className="container mx-auto text-center text-black">
-          <h1 className="text-6xl font-serif">{mainText}</h1>
-          <button className="py-2 px-4 bg-orange-400 hover:bg-orange-700 font-bold font-serif text-white rounded mt-2">
+          <h1 className="text-6xl font-semibold">{mainText}</h1>
+          <button className="py-2 px-5 bg-blue-400 shadow-md hover:bg-orange-700 font-bold font-serif text-white rounded mt-3">
             {buttonText}
           </button>
         </div>

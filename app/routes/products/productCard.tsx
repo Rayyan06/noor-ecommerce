@@ -1,8 +1,13 @@
 type ProductCardProps = {
   name: string;
   price: number;
+  description: string;
 };
-export default function ProductCard({ name, price, image }: ProductCardProps) {
+export default function ProductCard({
+  name,
+  price,
+  description,
+}: ProductCardProps) {
   return (
     <div
       className="flex flex-col items-center justify-end"

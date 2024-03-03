@@ -59,13 +59,13 @@ export default function App() {
         <header>
           <Navbar />
         </header>
-        <main className="h-screen">
+        <main>
           <Outlet />
         </main>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
-        <footer>
+        <footer className="mt-auto">
           <Footer />
         </footer>
       </body>
