@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@remix-run/dev": "^2.7.2",
+    "@types/node": "^20.11.24",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
@@ -35,12 +36,13 @@
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.1.6"
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "prisma": {
-    "seed": "ts-node/esm --loader --require tsconfig-paths/register prisma/seed.ts"
+    "seed": "tsx --loader --require tsconfig-paths/register prisma/seed.ts"
   }
 }

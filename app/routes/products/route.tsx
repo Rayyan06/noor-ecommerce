@@ -14,7 +14,7 @@ export const loader = async () => {
 export default function Products() {
   const data = useLoaderData<typeof loader>();
   return (
-    <div className="grid grid-cols-3 gap-3 justify-center h-screen overflow-auto">
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 lg:gap-24 justify-center m-12 md:m-16 lg:m-36">
       {data.products.map((product) => (
         <ProductCard
           key={product.id}

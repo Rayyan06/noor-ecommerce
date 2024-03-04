@@ -4,6 +4,7 @@ import { useState } from 'react';
 import ShoppingCartOutlined from './icons/ShoppingCartOutlined';
 import Menu from './icons/Menu';
 import InstagramIcon from './icons/Instagram';
+import FacebookIcon from './icons/Facebook';
 
 export default function Navbar() {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -13,22 +14,33 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white py-4">
-      <div className="container h-20 mx-auto flex justify-between items-center text-black font-serif">
-        <Link to="https://instagram.com">
-          <InstagramIcon width={20} />
-        </Link>
-        {/*-- Logo Name */}
-        <Link to="/" className="text-4xl mx-auto">
-          Home Decor Store
-        </Link>
-      </div>
+    <nav className="bg-white py-4 mx-8">
+      {/* Top Navigation Bar, always showing */}
       <div className="container h-20 mx-auto flex justify-between items-center text-black font-serif">
         <div className="block lg:hidden">
           <button onClick={toggleMenu} className="text-white">
             <Menu />
           </button>
         </div>
+        <span className="flex space-x-3">
+          <Link className="hidden lg:block" to="https://instagram.com">
+            <InstagramIcon width={25} />
+          </Link>
+          <Link className="hidden lg:block" to="https://instagram.com">
+            <FacebookIcon filter="grayscale(100%)" width={25} />
+          </Link>
+        </span>
+        {/*-- Logo Name */}
+        <Link to="/" className="text-4xl mx-auto italic">
+          NoorHadia
+        </Link>
+        <Link className="flex lg:hidden" to="/cart">
+          <ShoppingCartOutlined />
+        </Link>
+      </div>
+
+      {/* Subnavigation, hidden on mobile */}
+      <div className="container h-20 mx-auto hidden lg:flex justify-between items-center text-black font-serif">
         {/* Navigation links */}
         <ul
           className={`hidden lg:flex space-x-12 ${
@@ -56,9 +68,7 @@ export default function Navbar() {
         </ul>
 
         {/* Mobile Menu */}
-        <ul
-          className={`lg:hidden ${isCollapsed ? 'hidden' : 'block'} space-x-12`}
-        >
+        <ul className={`lg:hidden h-screen ${isCollapsed ? 'hidden' : 'flex'}`}>
           <li className="block py-2">
             <Link to="/">Home</Link>
           </li>

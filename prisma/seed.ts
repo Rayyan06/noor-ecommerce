@@ -4,6 +4,7 @@ const db = new PrismaClient();
 async function seed() {
   await Promise.all(
     getProducts().map((product) => {
+      console.log('Created! Product: ' + product.name);
       return db.product.create({ data: product });
     })
   );
