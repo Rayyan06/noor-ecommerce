@@ -5,6 +5,7 @@ import ShoppingCartOutlined from './icons/ShoppingCartOutlined';
 import Menu from './icons/Menu';
 import InstagramIcon from './icons/Instagram';
 import FacebookIcon from './icons/Facebook';
+import Youtube from './icons/Youtube';
 
 export default function Navbar() {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -26,8 +27,14 @@ export default function Navbar() {
           <Link className="hidden lg:block" to="https://instagram.com">
             <InstagramIcon width={25} />
           </Link>
-          <Link className="hidden lg:block" to="https://instagram.com">
+          <Link className="hidden lg:block" to="https://facebook.com">
             <FacebookIcon filter="grayscale(100%)" width={25} />
+          </Link>
+          <Link
+            className="hidden lg:block self-center"
+            to="https://youtube.com"
+          >
+            <Youtube className="fill-red-300" width={25} />
           </Link>
         </span>
         {/*-- Logo Name */}

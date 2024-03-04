@@ -43,6 +43,6 @@
     "node": ">=18.0.0"
   },
   "prisma": {
-    "seed": "tsx --loader --require tsconfig-paths/register prisma/seed.ts"
+    "seed": "tsx --require tsconfig-paths/register prisma/seed.ts"
   }
 }
