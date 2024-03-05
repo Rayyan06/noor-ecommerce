@@ -17,13 +17,13 @@ export default function Navbar() {
   return (
     <nav className="bg-white py-4 mx-8">
       {/* Top Navigation Bar, always showing */}
-      <div className="container h-20 mx-auto flex justify-between items-center text-black font-serif">
+      <div className="container h-20 mx-auto flex flex-row items-center justify-between text-black font-serif">
         <div className="block lg:hidden">
           <button onClick={toggleMenu} className="text-white">
             <Menu />
           </button>
         </div>
-        <span className="flex space-x-3">
+        <span className="flex space-x-3 w-3/12">
           <Link className="hidden lg:block" to="https://instagram.com">
             <InstagramIcon width={25} />
           </Link>
@@ -37,10 +37,14 @@ export default function Navbar() {
             <Youtube className="fill-red-300" width={25} />
           </Link>
         </span>
+
         {/*-- Logo Name */}
-        <Link to="/" className="text-4xl mx-auto italic">
-          NoorHadia
-        </Link>
+        <div className="flex">
+          <Link to="/" className="text-4xl mx-auto italic">
+            NoorHadia
+          </Link>
+        </div>
+        <div className="hidden lg:flex w-3/12"></div>
         <Link className="flex lg:hidden" to="/cart">
           <ShoppingCartOutlined />
         </Link>
