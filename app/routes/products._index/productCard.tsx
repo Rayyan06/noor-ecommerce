@@ -1,18 +1,15 @@
 import { Link } from '@remix-run/react';
 
 type ProductCardProps = {
+  id: string;
   name: string;
   price: number;
-  description: string;
 };
-export default function ProductCard({
-  name,
-  price,
-  description,
-}: ProductCardProps) {
+
+export default function ProductCard({ id, name, price }: ProductCardProps) {
   return (
     <div className="flex flex-col items-center">
-      <Link className="w-full h-full" to="/">
+      <Link className="w-full h-full" to={id}>
         <figure
           className="items-center bg-contain justify-end overflow:hidden aspect-9/16"
           style={{

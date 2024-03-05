@@ -17,4 +17,22 @@ model Product {
   name        String
   description String
   price       Int      @default(0)
+
+  cartItems CartItem[]
+}
+
+model Cart {
+  id          Int @id @default(autoincrement())
+  items       CartItem[]
+}
+
+model CartItem {
+  id        String @id @default(uuid())
+  cartId    Int
+  productId String
+  cart      Cart  @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+
+  quantity  Int
+  
 }

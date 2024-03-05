@@ -23,7 +23,7 @@ export default function Navbar() {
             <Menu />
           </button>
         </div>
-        <span className="flex space-x-3 w-3/12">
+        <span className="hidden lg:flex space-x-3 w-3/12">
           <Link className="hidden lg:block" to="https://instagram.com">
             <InstagramIcon width={25} />
           </Link>
