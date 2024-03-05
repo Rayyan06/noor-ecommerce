@@ -1,4 +1,4 @@
-import { Link } from '@remix-run/react';
+import { Link, NavLink } from '@remix-run/react';
 import { useState } from 'react';
 // import AccountCircle from './icons/AccountCircle';
 import ShoppingCartOutlined from './icons/ShoppingCartOutlined';
@@ -59,44 +59,74 @@ export default function Navbar() {
           }`}
         >
           <li>
-            <Link to="/">Home</Link>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <Link to="products" className="">
+            <NavLink
+              to="products"
+              className={({ isActive, isPending }) =>
+                isPending ? '' : isActive ? 'underline' : ''
+              }
+            >
               Shop
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/about" className="">
+            <NavLink
+              to="/about"
+              className={({ isActive, isPending }) =>
+                isPending ? '' : isActive ? 'underline' : ''
+              }
+            >
               About
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/contact" className="">
+            <NavLink
+              to="/contact"
+              className={({ isActive, isPending }) =>
+                isPending ? '' : isActive ? 'underline' : ''
+              }
+            >
               Contact
-            </Link>
+            </NavLink>
           </li>
         </ul>
 
         {/* Mobile Menu */}
         <ul className={`lg:hidden h-screen ${isCollapsed ? 'hidden' : 'flex'}`}>
           <li className="block py-2">
-            <Link to="/">Home</Link>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li className="block py-2">
-            <Link to="/products" className="">
+            <NavLink
+              to="/products"
+              className={({ isActive, isPending }) =>
+                isPending ? '' : isActive ? 'underline' : ''
+              }
+            >
               Shop
-            </Link>
+            </NavLink>
           </li>
           <li className="block py-2">
-            <Link to="/about" className="">
+            <NavLink
+              to="/about"
+              className={({ isActive, isPending }) =>
+                isPending ? '' : isActive ? 'underline' : ''
+              }
+            >
               About
-            </Link>
+            </NavLink>
           </li>
           <li className="block py-2">
-            <Link to="/contact" className="">
+            <NavLink
+              to="/contact"
+              className={({ isActive, isPending }) =>
+                isPending ? '' : isActive ? 'underline' : ''
+              }
+            >
               Contact
-            </Link>
+            </NavLink>
           </li>
         </ul>
 
