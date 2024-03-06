@@ -7,7 +7,10 @@ import InstagramIcon from './icons/Instagram';
 import FacebookIcon from './icons/Facebook';
 import Youtube from './icons/Youtube';
 
-export default function Navbar(cartItemCount: number) {
+type NavbarProps = {
+  cartItemCount: number;
+};
+export default function Navbar({ cartItemCount }: NavbarProps) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleMenu = () => {

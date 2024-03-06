@@ -11,6 +11,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  json,
   // useRouteError,
   // isRouteErrorResponse,
 } from '@remix-run/react';
@@ -19,7 +20,10 @@ import stylesheet from '~/tailwind.css';
 
 import Navbar from './components/navbar';
 import Footer from './components/footer';
-import { getOrCreateCart } from './utils/getOrCreateCart';
+import getOrCreateCart from './utils/createCart';
+import { db } from './utils/db.server';
+import { commitSession, getSession } from './sessions';
+import createCart from './utils/createCart';
 // import { ReactNode } from 'react';
 // import type { PropsWithChildren } from 'react';
 
@@ -56,11 +60,38 @@ export const links: LinksFunction = () => [
 // }
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const cart = getOrCreateCart(request);
-  return db.cart.findMany({ includ });
+  const session = await getSession(request.headers.get('Cookie'));
+
+  if (session.has('cartId')) {
+    const cartId = session.get('cartId') || 0;
+
+    const totalQuantity = await db.cartItem.aggregate({
+      where: {
+        cartId: 28,
+      },
+      _sum: {
+        quantity: true,
+      },
+    });
+    console.log(totalQuantity);
+
+    return json({ cartItemCount: totalQuantity._sum.quantity ?? 0 });
+  }
+
+  // If we don't have the cartId, we create a new Cart
+  return json(
+    { cartItemCount: 0 },
+    {
+      headers: {
+        'Set-Cookie': await createCart(session),
+      },
+    }
+  );
 }
+
 export default function App() {
-  const cartItemCount: number = useLoaderData<typeof loader>();
+  const { cartItemCount } = useLoaderData<typeof loader>();
+  console.log(cartItemCount);
 
   return (
     <html lang="en">

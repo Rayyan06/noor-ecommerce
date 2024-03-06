@@ -1,5 +1,5 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
-import { json } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 import { Form, useLoaderData } from '@remix-run/react';
 import { useState } from 'react';
 import { getSession } from '~/sessions';
@@ -104,5 +104,5 @@ export async function action({ params, request }: ActionFunctionArgs) {
     });
   }
 
-  return json({ success: true });
+  return redirect('/cart');
 }
