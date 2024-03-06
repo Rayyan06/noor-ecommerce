@@ -30,7 +30,6 @@ export default function IndexRoute() {
 
   return (
     <div className="mx-36 space-y-10">
-      {cartId}
       <Card mainText="Browse our latest products" buttonText="Shop Now" />
       <Card mainText="See more" buttonText="Shop Now" />
     </div>

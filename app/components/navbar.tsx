@@ -7,7 +7,7 @@ import InstagramIcon from './icons/Instagram';
 import FacebookIcon from './icons/Facebook';
 import Youtube from './icons/Youtube';
 
-export default function Navbar() {
+export default function Navbar(cartItemCount: number) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleMenu = () => {
@@ -142,7 +142,7 @@ export default function Navbar() {
           <li className="flex space-x-1">
             <Link className="flex" to="/cart">
               <ShoppingCartOutlined />
-              <span className="ml-1">Cart</span>
+              <span className="ml-1">Cart({cartItemCount})</span>
             </Link>
           </li>
         </ul>

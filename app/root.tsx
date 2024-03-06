@@ -1,4 +1,8 @@
-import type { MetaFunction, LinksFunction } from '@remix-run/node';
+import type {
+  MetaFunction,
+  LinksFunction,
+  LoaderFunctionArgs,
+} from '@remix-run/node';
 import {
   LiveReload,
   Outlet,
@@ -6,14 +10,16 @@ import {
   Meta,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
   // useRouteError,
   // isRouteErrorResponse,
 } from '@remix-run/react';
 
-import stylesheet from './tailwind.css';
+import stylesheet from '~/tailwind.css';
 
 import Navbar from './components/navbar';
 import Footer from './components/footer';
+import { getOrCreateCart } from './utils/getOrCreateCart';
 // import { ReactNode } from 'react';
 // import type { PropsWithChildren } from 'react';
 
@@ -48,7 +54,14 @@ export const links: LinksFunction = () => [
 //     </html>
 //   );
 // }
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const cart = getOrCreateCart(request);
+  return db.cart.findMany({ includ });
+}
 export default function App() {
+  const cartItemCount: number = useLoaderData<typeof loader>();
+
   return (
     <html lang="en">
       <head>
@@ -57,7 +70,7 @@ export default function App() {
       </head>
       <body>
         <header>
-          <Navbar />
+          <Navbar cartItemCount={cartItemCount} />
         </header>
         <main>
           <Outlet />
