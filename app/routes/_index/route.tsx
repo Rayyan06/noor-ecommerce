@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, json, redirect } from '@remix-run/node';
+import { LoaderFunctionArgs, json } from '@remix-run/node';
 import Card from './card';
 import { commitSession, getSession } from '~/sessions';
 import { useLoaderData } from '@remix-run/react';
@@ -9,7 +9,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   if (session.has('cartId')) {
     const cartId = session.get('cartId');
-    console.log(cartId);
 
     return json({ cartId });
   }
@@ -17,15 +16,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   session.set('cartId', cart.id);
 
-  const cookie = await commitSession(session);
-
-  console.log(cookie);
-
   return json(
     { cartId: cart.id },
     {
       headers: {
-        'Set-Cookie': cookie,
+        'Set-Cookie': await commitSession(session),
       },
     }
   );

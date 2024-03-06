@@ -1,6 +1,6 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
+import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { Form, useLoaderData } from '@remix-run/react';
 import { useState } from 'react';
 import { getSession } from '~/sessions';
 
@@ -50,30 +50,59 @@ export default function ProductDetail() {
             +
           </button>
         </div>
-        <button className="bg-black text-white p-3 font-bold hover:bg-gray-500">
-          ADD TO CART
-        </button>
+        <Form method="post">
+          <button
+            type="submit"
+            className="bg-black text-white p-3 font-bold hover:bg-gray-500"
+          >
+            ADD TO CART
+          </button>
+        </Form>
       </div>
     </div>
   );
 }
 
-/*
-export async function action({ params, request }) {
+export async function action({ params, request }: ActionFunctionArgs) {
   const { productId } = params;
 
-  const session = await getSession();
+  const session = await getSession(request.headers.get('Cookie'));
+  console.log(request.headers.get('Cookie'));
 
-  const cartId = session.get('cartId');
+  const cartId = (await session.get('cartId')) || '';
 
-  await db.cartItem.create({
-    data: {
+  if (!productId || !cartId) {
+    // Handle missing productId or cartId
+    return new Response('productId or cartId is missing', { status: 400 });
+  }
+  // Check if the product already exists in the cart
+  const existingCartItem = await db.cartItem.findFirst({
+    where: {
       productId: productId,
-      quantity: 1,
-      cartId,
+      cartId: cartId,
     },
   });
 
+  if (existingCartItem) {
+    // If the product exists, update the quantity
+    await db.cartItem.update({
+      where: {
+        id: existingCartItem.id,
+      },
+      data: {
+        quantity: existingCartItem.quantity + 1, // Increment the quantity
+      },
+    });
+  } else {
+    // If the product does not exist, add it to the cart
+    await db.cartItem.create({
+      data: {
+        productId: productId,
+        quantity: 1,
+        cartId: cartId,
+      },
+    });
+  }
+
   return json({ success: true });
 }
-*/
