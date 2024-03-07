@@ -7,7 +7,7 @@ export default function ProductCard({ product }) {
         <figure
           className="items-center bg-contain justify-end overflow:hidden aspect-9/16"
           style={{
-            backgroundImage: product.imageUrl,
+            backgroundImage: 'url(product.imageUrl)',
           }}
         ></figure>
 
