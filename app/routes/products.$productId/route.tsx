@@ -25,7 +25,7 @@ export default function ProductDetail() {
     <div className="flex flex-row mx-12 md:mx-16 lg:mx-24">
       <div>
         <img
-          src={`https://dummyimage.com/1000x600/ffffff/0011ff&text=Insert ${data.product.name} Image`}
+          src={data.product.imageUrl!}
           alt={data.product.name}
           width="1000"
           height="800"

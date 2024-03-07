@@ -17,6 +17,7 @@ model Product {
   name        String
   description String
   price       Int      @default(0)
+  imageUrl    String?
 
   cartItems CartItem[]
 }

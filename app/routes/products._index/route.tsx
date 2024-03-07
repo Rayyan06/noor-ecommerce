@@ -16,7 +16,7 @@ export default function Products() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 lg:gap-24 justify-center m-12 md:m-16 lg:m-24">
       {data.products.map((product) => (
-        <ProductCard key={product.id} {...product} />
+        <ProductCard key={product.id} product={product} />
       ))}
     </div>
   );
