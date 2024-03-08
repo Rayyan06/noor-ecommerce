@@ -1,7 +1,8 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { json, redirect } from '@remix-run/node';
-import { Form, useLoaderData } from '@remix-run/react';
+import { Form, useActionData, useLoaderData } from '@remix-run/react';
 import { useState } from 'react';
+import QuantityPicker from '~/components/quantityPicker';
 import { getSession } from '~/sessions';
 
 import { db } from '~/utils/db.server';
@@ -19,41 +20,35 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
 export default function ProductDetail() {
   const data = useLoaderData<typeof loader>();
+  const actionData = useActionData<typeof action>();
   const [quantity, setQuantity] = useState(1);
 
   return (
-    <div className="flex flex-row mx-12 md:mx-16 lg:mx-24">
-      <div>
-        <img
-          src={data.product.imageUrl!}
-          alt={data.product.name}
-          width="1000"
-          height="800"
-        />
+    <div className="flex flex-row justify-center m-12 md:m-16 lg:m-24">
+      <div className="max-w-96 mr-20">
+        <img src={`images/${data.product.imageName}`} alt={data.product.name} />
       </div>
-      <div className="flex flex-col p-3 space-y-8 w-2/5 justify-center">
+      <div className="flex flex-col p-3 space-y-3 w-2/5 justify-center">
         <h1 className="text-5xl font-serif">{data.product.name}</h1>
+        <h3 className="text-lg">{data.product.description}</h3>
         <h4 className="text-5xl font-bold">${data.product.price}</h4>
-        <p className="font-semibold">Select Quantity</p>
-        <div className="flex items-center px-4 mt-2 space-x-4">
-          <button
-            className="px-4 py-2 hover:shadow-sm hover:text-teal-500 hover:font-bold"
-            onClick={() => setQuantity(quantity - 1)}
-          >
-            -
-          </button>
-          <span>{quantity}</span>
-          <button
-            className="px-4 py-2 hover:shadow-sm hover:text-teal-500 hover:font-bold"
-            onClick={() => setQuantity(quantity + 1)}
-          >
-            +
-          </button>
-        </div>
         <Form method="post">
+          <label className="font-semibold text-lg" htmlFor="quantity">
+            Select Quantity
+          </label>
+          <div className="flex items-center mt-2">
+            <QuantityPicker quantity={quantity} setQuantity={setQuantity} />
+
+            <div>
+              {actionData?.errors?.quantity && (
+                <em>{actionData?.errors?.quantity}</em>
+              )}
+            </div>
+          </div>
+
           <button
             type="submit"
-            className="bg-black text-white p-3 font-bold hover:bg-gray-500"
+            className="bg-black text-white p-3 font-bold hover:bg-gray-500 mt-5"
           >
             ADD TO CART
           </button>
@@ -65,6 +60,21 @@ export default function ProductDetail() {
 
 export async function action({ params, request }: ActionFunctionArgs) {
   const { productId } = params;
+
+  // Get the quantity from the formData
+  const formData = await request.formData();
+  const quantity = Number(formData.get('quantity'));
+
+  interface Error {
+    quantity?: string;
+  }
+  const errors: Error = {};
+
+  if (quantity < 1) {
+    errors.quantity = 'Quantity is less than 1';
+  }
+
+  if (Object.keys(errors).length > 0) return json({ errors });
 
   const session = await getSession(request.headers.get('Cookie'));
   console.log(request.headers.get('Cookie'));
@@ -90,7 +100,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
         id: existingCartItem.id,
       },
       data: {
-        quantity: existingCartItem.quantity + 1, // Increment the quantity
+        quantity: existingCartItem.quantity + quantity, // Increment the quantity
       },
     });
   } else {
@@ -98,7 +108,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
     await db.cartItem.create({
       data: {
         productId: productId,
-        quantity: 1,
+        quantity: quantity,
         cartId: cartId,
       },
     });

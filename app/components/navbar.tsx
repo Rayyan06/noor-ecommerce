@@ -49,7 +49,7 @@ export default function Navbar({ cartItemCount }: NavbarProps) {
         </div>
         <div className="hidden lg:flex w-3/12"></div>
         <Link className="flex lg:hidden" to="/cart">
-          <ShoppingCartOutlined />
+          <ShoppingCartOutlined />({cartItemCount})
         </Link>
       </div>
 
@@ -143,7 +143,7 @@ export default function Navbar({ cartItemCount }: NavbarProps) {
             </Link>
           </li> */}
           <li className="flex space-x-1">
-            <Link className="flex" to="/cart">
+            <Link className="flex" to="/cart" prefetch="intent">
               <ShoppingCartOutlined />
               <span className="ml-1">Cart({cartItemCount})</span>
             </Link>

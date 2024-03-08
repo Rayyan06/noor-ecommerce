@@ -20,27 +20,27 @@ function getProducts() {
       name: 'Picture Frame',
       description: 'Top Quality picture frame in various sizes',
       price: 300,
-      imageUrl: 'images/PictureFrame.jpg',
+      imageName: 'PictureFrame.jpg',
     },
     {
       name: 'Throw Pillow Set',
       description: 'Luxurious set of throw pillows to enhance your sofa or bed',
       price: 50,
-      imageUrl: 'images/ThrowPillowSet.jpg',
+      imageName: 'ThrowPillowSet.jpg',
     },
     {
       name: 'Wall Clock',
       description:
         'Elegant wall clock with silent mechanism for a peaceful atmosphere',
       price: 100,
-      imageUrl: 'images/WallClock.jpg',
+      imageName: 'WallClock.jpg',
     },
 
     {
       name: 'Faux Fur Throw Blanket',
       description: 'Soft and plush faux fur throw blanket for chilly evenings',
       price: 70,
-      imageUrl: 'images/FauxFurThrowBlanket.jpg',
+      imageName: 'FauxFurThrowBlanket.jpg',
     },
   ];
 }

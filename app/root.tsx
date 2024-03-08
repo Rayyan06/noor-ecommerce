@@ -65,9 +65,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
   if (session.has('cartId')) {
     const cartId = session.get('cartId') || 0;
 
+    console.log(cartId);
+
     const totalQuantity = await db.cartItem.aggregate({
       where: {
-        cartId: 28,
+        cartId: cartId,
       },
       _sum: {
         quantity: true,

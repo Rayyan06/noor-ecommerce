@@ -14,10 +14,14 @@ export const loader = async () => {
 export default function Products() {
   const data = useLoaderData<typeof loader>();
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 lg:gap-24 justify-center m-12 md:m-16 lg:m-24">
-      {data.products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+    <div className="m-12 md:m-16 lg:m-24">
+      <h1 className="text-5xl font-serif mb-5">Products</h1>
+      <hr />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-12 justify-center mt-5 ">
+        {data.products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 }
