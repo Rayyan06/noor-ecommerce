@@ -37,7 +37,11 @@ export default function ProductDetail() {
             Select Quantity
           </label>
           <div className="flex items-center mt-2">
-            <QuantityPicker quantity={quantity} setQuantity={setQuantity} />
+            <QuantityPicker
+              quantity={quantity}
+              setQuantity={setQuantity}
+              maxQuantity={20}
+            />
 
             <div>
               {actionData?.errors?.quantity && (

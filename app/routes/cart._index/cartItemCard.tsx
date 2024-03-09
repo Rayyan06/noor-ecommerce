@@ -42,6 +42,7 @@ export default function CartItemCard({ item }: any) {
             <QuantityPicker
               quantity={quantity}
               setQuantity={setQuantity}
+              maxQuantity={20}
               submitOnChange={true}
             />
             <input type="hidden" value={item.id} />
