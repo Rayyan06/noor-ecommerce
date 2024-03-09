@@ -1,7 +1,10 @@
+import { ActionFunctionArgs, json } from '@remix-run/node';
 import { Link, useActionData, useFetcher } from '@remix-run/react';
 import { useState } from 'react';
 import QuantityPicker from '~/components/quantityPicker';
-import { action } from '~/routes/cart.$itemId';
+//import { action } from '~/routes/cart.$itemId';
+import { getSession } from '~/sessions';
+import { db } from '~/utils/db.server';
 
 export default function CartItemCard({ item }: any) {
   const fetcher = useFetcher();
@@ -41,6 +44,7 @@ export default function CartItemCard({ item }: any) {
               setQuantity={setQuantity}
               submitOnChange={true}
             />
+            <input type="hidden" value={item.id} />
           </fetcher.Form>
           <div>
             {actionData?.errors?.quantity && (
@@ -54,4 +58,40 @@ export default function CartItemCard({ item }: any) {
       </div>
     </li>
   );
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+
+  const quantity = Number(formData.get('quantity'));
+  const session = await getSession(request.headers.get('Cookie'));
+  const cartId = await session.get('cartId');
+  const itemId = String(formData.get('itemId'));
+
+  if (!itemId) return new Response('Item does not exist', { status: 404 });
+
+  interface Error {
+    quantity?: string;
+  }
+  const errors: Error = {};
+
+  if (quantity < 1) {
+    errors.quantity = 'Quantity is less than 1';
+  } else if (quantity > 20) {
+    errors.quantity = 'Quantity is greater than 20';
+  }
+
+  if (Object.keys(errors).length > 0) return json({ errors }, { status: 404 });
+
+  await db.cartItem.update({
+    where: {
+      id: itemId,
+      cartId: cartId,
+    },
+    data: {
+      quantity: quantity, // Set the quantity
+    },
+  });
+
+  return json({ success: true });
 }

@@ -1,5 +1,6 @@
 interface QuantityPickerProps {
   quantity: number;
+  maxQuantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
   submitOnChange?: boolean;
 }
@@ -7,8 +8,12 @@ interface QuantityPickerProps {
 export default function QuantityPicker({
   quantity,
   setQuantity,
+  maxQuantity,
   submitOnChange = false,
 }: QuantityPickerProps) {
+  const updateQuantity = (newQuantity: number) => {
+    if (quantity > 0 || quantity < maxQuantity) setQuantity(newQuantity);
+  };
   return (
     <div className="flex items-center">
       <button

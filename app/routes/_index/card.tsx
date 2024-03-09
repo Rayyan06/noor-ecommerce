@@ -1,3 +1,5 @@
+import { Link } from '@remix-run/react';
+
 type CardProps = {
   mainText: string;
   buttonText: string;
@@ -15,9 +17,12 @@ export default function Card({ mainText, buttonText }: CardProps) {
       >
         <div className="container mx-auto text-center text-black">
           <h1 className="text-6xl font-semibold">{mainText}</h1>
-          <button className="py-2 px-5 bg-blue-400 shadow-md hover:bg-orange-700 font-bold font-serif text-white rounded mt-3">
+          <Link
+            className="py-2 px-5 bg-blue-400 shadow-md hover:bg-orange-700 font-bold font-serif text-white rounded "
+            to="products"
+          >
             {buttonText}
-          </button>
+          </Link>
         </div>
       </div>
     </section>
