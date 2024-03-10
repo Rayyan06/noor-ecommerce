@@ -32,10 +32,10 @@ export default function Cart() {
   const { subTotal, cartItems, itemCount } = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex flex-col container mx-48">
+    <div className="flex flex-col sm:mx-6 mx-12 lg:mx-24 xl:mx-36">
       <div className="flex flex-row w-full justify-between items-center">
         <h1 className="text-5xl mb-4 font-serif">My Cart</h1>
-        <h3 className="text-xl font-serif">Price</h3>
+        <h3 className="sm:hidden md:block text-xl font-serif">Price</h3>
       </div>
       <hr />
 

@@ -11,10 +11,14 @@ export default function Card({ mainText, buttonText }: CardProps) {
       <div
         className="flex items-center bg-cover bg-center h-screen"
         style={{
-          backgroundImage:
-            'url("https://dummyimage.com/2000x700/969696/8c8c8c.jpg&text=Insert+Image+here")',
+          backgroundImage: "url('/public/images/banner.jpeg')",
         }}
       >
+        <img
+          src={`public/images/banner.jpeg`}
+          alt={'banner'}
+          className="h-full w-full absolute"
+        ></img>
         <div className="container mx-auto text-center text-black">
           <h1 className="text-6xl font-semibold">{mainText}</h1>
           <Link

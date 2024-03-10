@@ -52,9 +52,12 @@ export default function CartItemCard({ item }: any) {
               <em>{actionData?.errors?.quantity}</em>
             )}
           </div>
+          <h3 className="font-bold text-2xl sm:block md:hidden">
+            ${item.product.price}.00
+          </h3>
         </div>
       </div>
-      <div className="flex">
+      <div className="sm:hidden md:flex">
         <h3 className="font-bold text-2xl">${item.product.price}.00</h3>
       </div>
     </li>
