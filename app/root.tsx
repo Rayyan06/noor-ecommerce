@@ -4,7 +4,6 @@ import type {
   LoaderFunctionArgs,
 } from '@remix-run/node';
 import {
-  LiveReload,
   Outlet,
   Links,
   Meta,
@@ -113,7 +112,6 @@ export default function App() {
         </main>
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
         <footer className="mt-auto">
           <Footer />
         </footer>

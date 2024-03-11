@@ -12,7 +12,7 @@ export default function QuantityPicker({
   submitOnChange = false,
 }: QuantityPickerProps) {
   const updateQuantity = (newQuantity: number) => {
-    if (quantity > 1 || quantity < maxQuantity) setQuantity(newQuantity);
+    if (quantity > 0 && quantity < maxQuantity) setQuantity(newQuantity);
   };
   return (
     <div className="flex items-center">

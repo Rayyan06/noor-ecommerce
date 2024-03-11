@@ -9,6 +9,7 @@ export default function CartItemCard({ item }: any) {
   const deleteFetcher = useFetcher();
   const isDeleting = deleteFetcher.state !== 'idle';
   // const submit = useSubmit();
+
   const [quantity, setQuantity] = useState(item.quantity);
   const actionData = useActionData<typeof action>();
 
@@ -47,7 +48,7 @@ export default function CartItemCard({ item }: any) {
                 maxQuantity={20}
                 submitOnChange={true}
               />
-              <input type="hidden" value={item.id} name={item.id} />
+              <input type="hidden" value={item.id} name="itemId" />
             </quantityFetcher.Form>
             <div>
               {actionData?.errors?.quantity && (
@@ -62,7 +63,7 @@ export default function CartItemCard({ item }: any) {
               disabled={isDeleting}
             >
               <Trash />
-              <input type="hidden" value={item.id} name={item.id} />
+              <input type="hidden" value={item.id} name="itemId" />
               <span>Delete Item</span>
             </button>
           </deleteFetcher.Form>

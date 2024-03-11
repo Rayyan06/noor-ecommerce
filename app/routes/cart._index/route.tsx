@@ -87,12 +87,18 @@ export async function action({ request }: ActionFunctionArgs) {
   const cartId = await session.get('cartId');
   const itemId = String(formData.get('itemId'));
 
-  if (request.method === 'delete') {
+  console.log(`itemId: ${itemId}`);
+
+  if (request.method === 'DELETE') {
     await db.cartItem.delete({ where: { id: itemId, cartId: cartId } });
+    console.log('Deleting Item...');
+
     return json({ success: true });
   }
 
   const quantity = Number(formData.get('quantity'));
+
+  console.log('Quantity: ' + quantity);
 
   interface Error {
     quantity?: string;
