@@ -9,13 +9,16 @@ import Youtube from './icons/Youtube';
 
 type NavbarProps = {
   cartItemCount: number;
+  isCollapsed: boolean;
+  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 };
-export default function Navbar({ cartItemCount }: NavbarProps) {
-  const [isCollapsed, setIsCollapsed] = useState(true);
-
+export default function Navbar({
+  cartItemCount,
+  isCollapsed,
+  setIsCollapsed,
+}: NavbarProps) {
   const toggleMenu = () => {
     setIsCollapsed(!isCollapsed);
-    document.main.classList.toggle('hidden', !isCollapsed);
   };
 
   return (
@@ -117,9 +120,10 @@ export default function Navbar({ cartItemCount }: NavbarProps) {
 
       {/* Mobile Menu */}
       <ul
-        className={`lg:hidden h-full w-full flex flex-col items-center justify-center fixed overflow-y-hidden bg-white text-3xl font-serif space-y-5 transition duration-1000 ease-in-out left-0 top-0 bottom-0 z-30 ${
-          isCollapsed ? ' w-0 hidden' : 'w-100'
+        className={`lg:hidden h-full flex flex-col items-center justify-center fixed overflow-y-hidden bg-white opacity-90 text-3xl font-serif space-y-5 transition duration-1000 left-0 top-0 bottom-0 z-30 ${
+          isCollapsed ? 'w-0' : 'w-full'
         }`}
+        onClick={() => setIsCollapsed(true)}
       >
         <li className="block py-2">
           <NavLink to="/">Home</NavLink>

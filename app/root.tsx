@@ -23,6 +23,7 @@ import Footer from './components/footer';
 import { db } from './utils/db.server';
 import { getSession } from './sessions';
 import createCart from './utils/createCart';
+import { useState } from 'react';
 // import { ReactNode } from 'react';
 // import type { PropsWithChildren } from 'react';
 
@@ -92,6 +93,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function App() {
   const { cartItemCount } = useLoaderData<typeof loader>();
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   return (
     <html lang="en">
@@ -99,9 +101,15 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body
+        className={isCollapsed ? '' : 'overflow-y-hidden md:overflow-y-auto'}
+      >
         <header>
-          <Navbar cartItemCount={cartItemCount} />
+          <Navbar
+            cartItemCount={cartItemCount}
+            isCollapsed={isCollapsed}
+            setIsCollapsed={setIsCollapsed}
+          />
         </header>
         <main>
           <Outlet />
