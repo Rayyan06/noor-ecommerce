@@ -24,7 +24,7 @@ export default function QuantityPicker({
         -
       </button>
       <input
-        className="block border-0 w-24 h-full py-2.5 ring-0 ring-inset items-center justify-center text-center ring-gray-300 focus:ring-2 focus:ring-gray-200 bg-white"
+        className="block border-0 w-16 h-full py-2.5 ring-0 ring-inset items-center justify-center text-center ring-gray-300 focus:ring-2 focus:ring-gray-200 bg-white"
         type="number"
         value={quantity}
         onChange={(e) => {
@@ -32,6 +32,7 @@ export default function QuantityPicker({
         }}
         name="quantity"
         id="quantity"
+        disabled={submitOnChange}
       />
 
       <button

@@ -20,10 +20,10 @@ import stylesheet from '~/tailwind.css';
 
 import Navbar from './components/navbar';
 import Footer from './components/footer';
-import getOrCreateCart from './utils/createCart';
 import { db } from './utils/db.server';
-import { commitSession, getSession } from './sessions';
+import { getSession } from './sessions';
 import createCart from './utils/createCart';
+import { useState } from 'react';
 // import { ReactNode } from 'react';
 // import type { PropsWithChildren } from 'react';
 
@@ -93,7 +93,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function App() {
   const { cartItemCount } = useLoaderData<typeof loader>();
-  console.log(cartItemCount);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   return (
     <html lang="en">
@@ -101,9 +101,15 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body
+        className={isCollapsed ? '' : 'overflow-y-hidden md:overflow-y-auto'}
+      >
         <header>
-          <Navbar cartItemCount={cartItemCount} />
+          <Navbar
+            cartItemCount={cartItemCount}
+            isCollapsed={isCollapsed}
+            setIsCollapsed={setIsCollapsed}
+          />
         </header>
         <main>
           <Outlet />

@@ -1,4 +1,8 @@
-import { json, type LoaderFunctionArgs } from '@remix-run/node';
+import {
+  ActionFunctionArgs,
+  json,
+  type LoaderFunctionArgs,
+} from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import QuantityPicker from '~/components/quantityPicker';
 import { getSession } from '~/sessions';
@@ -74,4 +78,36 @@ export default function Cart() {
       </div>
     </div>
   );
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+
+  const quantity = Number(formData.get('quantity'));
+  const session = await getSession(request.headers.get('Cookie'));
+  const cartId = await session.get('cartId');
+  const itemId = String(formData.get('itemId'));
+
+  interface Error {
+    quantity?: string;
+  }
+  const errors: Error = {};
+
+  if (quantity < 1) {
+    errors.quantity = 'Quantity is less than 1';
+  }
+
+  if (Object.keys(errors).length > 0) return json({ errors }, { status: 404 });
+
+  await db.cartItem.update({
+    where: {
+      id: itemId,
+      cartId: cartId,
+    },
+    data: {
+      quantity: quantity, // Set the quantity
+    },
+  });
+
+  return json({ success: true });
 }

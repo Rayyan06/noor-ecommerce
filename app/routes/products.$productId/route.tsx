@@ -24,11 +24,11 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
 
   return (
-    <div className="flex flex-row justify-center m-12 md:m-16 lg:m-24">
-      <div className="max-w-96 mr-20">
+    <div className="flex flex-col items-center md:items-start md:flex-row justify-center m-12 md:m-16 lg:m-24">
+      <div className="max-w-96 md:mr-20">
         <img src={`images/${data.product.imageName}`} alt={data.product.name} />
       </div>
-      <div className="flex flex-col p-3 space-y-3 w-2/5 justify-center">
+      <div className="flex flex-col p-3 space-y-3 mt-3 md:mt-0 md:w-2/5 justify-center">
         <h1 className="text-5xl font-serif">{data.product.name}</h1>
         <h3 className="text-lg">{data.product.description}</h3>
         <h4 className="text-5xl font-semibold">${data.product.price}</h4>

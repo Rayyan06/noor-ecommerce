@@ -9,10 +9,14 @@ import Youtube from './icons/Youtube';
 
 type NavbarProps = {
   cartItemCount: number;
+  isCollapsed: boolean;
+  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 };
-export default function Navbar({ cartItemCount }: NavbarProps) {
-  const [isCollapsed, setIsCollapsed] = useState(true);
-
+export default function Navbar({
+  cartItemCount,
+  isCollapsed,
+  setIsCollapsed,
+}: NavbarProps) {
   const toggleMenu = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -21,7 +25,7 @@ export default function Navbar({ cartItemCount }: NavbarProps) {
     <nav className="bg-white py-4 mx-8">
       {/* Top Navigation Bar, always showing */}
       <div className="container h-20 mx-auto flex flex-row items-center justify-between text-black font-serif">
-        <div className="block lg:hidden">
+        <div className="block lg:hidden z-40">
           <button onClick={toggleMenu} className="text-white">
             <Menu />
           </button>
@@ -96,43 +100,6 @@ export default function Navbar({ cartItemCount }: NavbarProps) {
           </li>
         </ul>
 
-        {/* Mobile Menu */}
-        <ul className={`lg:hidden h-screen ${isCollapsed ? 'hidden' : 'flex'}`}>
-          <li className="block py-2">
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li className="block py-2">
-            <NavLink
-              to="/products"
-              className={({ isActive, isPending }) =>
-                isPending ? '' : isActive ? 'underline' : ''
-              }
-            >
-              Shop
-            </NavLink>
-          </li>
-          <li className="block py-2">
-            <NavLink
-              to="/about"
-              className={({ isActive, isPending }) =>
-                isPending ? '' : isActive ? 'underline' : ''
-              }
-            >
-              About
-            </NavLink>
-          </li>
-          <li className="block py-2">
-            <NavLink
-              to="/contact"
-              className={({ isActive, isPending }) =>
-                isPending ? '' : isActive ? 'underline' : ''
-              }
-            >
-              Contact
-            </NavLink>
-          </li>
-        </ul>
-
         {/* Login & Cart */}
         <ul className="hidden lg:flex space-x-12">
           {/* <li className="space-x-1 flex">
@@ -150,6 +117,48 @@ export default function Navbar({ cartItemCount }: NavbarProps) {
           </li>
         </ul>
       </div>
+
+      {/* Mobile Menu */}
+      <ul
+        className={`lg:hidden h-full flex flex-col items-center justify-center fixed overflow-y-hidden bg-white opacity-90 text-3xl font-serif space-y-5 transition duration-1000 left-0 top-0 bottom-0 z-30 ${
+          isCollapsed ? 'w-0' : 'w-full'
+        }`}
+        onClick={() => setIsCollapsed(true)}
+      >
+        <li className="block py-2">
+          <NavLink to="/">Home</NavLink>
+        </li>
+        <li className="block py-2">
+          <NavLink
+            to="/products"
+            className={({ isActive, isPending }) =>
+              isPending ? '' : isActive ? 'underline' : ''
+            }
+          >
+            Shop
+          </NavLink>
+        </li>
+        <li className="block py-2">
+          <NavLink
+            to="/about"
+            className={({ isActive, isPending }) =>
+              isPending ? '' : isActive ? 'underline' : ''
+            }
+          >
+            About
+          </NavLink>
+        </li>
+        <li className="block py-2">
+          <NavLink
+            to="/contact"
+            className={({ isActive, isPending }) =>
+              isPending ? '' : isActive ? 'underline' : ''
+            }
+          >
+            Contact
+          </NavLink>
+        </li>
+      </ul>
     </nav>
   );
 }
