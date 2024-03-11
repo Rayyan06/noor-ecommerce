@@ -62,6 +62,7 @@ export default function CartItemCard({ item }: any) {
               disabled={isDeleting}
             >
               <Trash />
+              <input type="hidden" value={item.id} name={item.id} />
               <span>Delete Item</span>
             </button>
           </deleteFetcher.Form>

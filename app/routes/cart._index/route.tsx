@@ -83,10 +83,16 @@ export default function Cart() {
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
 
-  const quantity = Number(formData.get('quantity'));
   const session = await getSession(request.headers.get('Cookie'));
   const cartId = await session.get('cartId');
   const itemId = String(formData.get('itemId'));
+
+  if (request.method === 'delete') {
+    await db.cartItem.delete({ where: { id: itemId, cartId: cartId } });
+    return json({ success: true });
+  }
+
+  const quantity = Number(formData.get('quantity'));
 
   interface Error {
     quantity?: string;

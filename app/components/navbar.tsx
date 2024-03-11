@@ -6,6 +6,7 @@ import Menu from './icons/Menu';
 import InstagramIcon from './icons/Instagram';
 import FacebookIcon from './icons/Facebook';
 import Youtube from './icons/Youtube';
+import Close from './icons/Close';
 
 type NavbarProps = {
   cartItemCount: number;
@@ -21,13 +22,19 @@ export default function Navbar({
     setIsCollapsed(!isCollapsed);
   };
 
+  const iconWidth = 50;
+
   return (
     <nav className="bg-white py-4 mx-8">
       {/* Top Navigation Bar, always showing */}
       <div className="container h-20 mx-auto flex flex-row items-center justify-between text-black font-serif">
-        <div className="block lg:hidden z-40">
+        <div className={`block lg:hidden ${!isCollapsed && 'z-40'}`}>
           <button onClick={toggleMenu} className="text-white">
-            <Menu />
+            {isCollapsed ? (
+              <Menu width={iconWidth} />
+            ) : (
+              <Close width={iconWidth} />
+            )}
           </button>
         </div>
         <span className="hidden lg:flex space-x-3 w-3/12">
@@ -123,14 +130,16 @@ export default function Navbar({
         className={`lg:hidden h-full flex flex-col items-center justify-center fixed overflow-y-hidden bg-white opacity-90 text-3xl font-serif space-y-5 transition duration-1000 left-0 top-0 bottom-0 z-30 ${
           isCollapsed ? 'w-0' : 'w-full'
         }`}
-        onClick={() => setIsCollapsed(true)}
       >
         <li className="block py-2">
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/" onClick={() => setIsCollapsed(true)}>
+            Home
+          </NavLink>
         </li>
         <li className="block py-2">
           <NavLink
             to="/products"
+            onClick={() => setIsCollapsed(true)}
             className={({ isActive, isPending }) =>
               isPending ? '' : isActive ? 'underline' : ''
             }
@@ -141,6 +150,7 @@ export default function Navbar({
         <li className="block py-2">
           <NavLink
             to="/about"
+            onClick={() => setIsCollapsed(true)}
             className={({ isActive, isPending }) =>
               isPending ? '' : isActive ? 'underline' : ''
             }
@@ -151,6 +161,7 @@ export default function Navbar({
         <li className="block py-2">
           <NavLink
             to="/contact"
+            onClick={() => setIsCollapsed(true)}
             className={({ isActive, isPending }) =>
               isPending ? '' : isActive ? 'underline' : ''
             }

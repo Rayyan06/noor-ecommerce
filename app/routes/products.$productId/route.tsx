@@ -81,7 +81,6 @@ export async function action({ params, request }: ActionFunctionArgs) {
   if (Object.keys(errors).length > 0) return json({ errors });
 
   const session = await getSession(request.headers.get('Cookie'));
-  console.log(request.headers.get('Cookie'));
 
   const cartId = (await session.get('cartId')) || '';
 
