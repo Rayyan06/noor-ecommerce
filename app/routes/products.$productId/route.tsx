@@ -31,7 +31,7 @@ export default function ProductDetail() {
       <div className="flex flex-col p-3 space-y-3 w-2/5 justify-center">
         <h1 className="text-5xl font-serif">{data.product.name}</h1>
         <h3 className="text-lg">{data.product.description}</h3>
-        <h4 className="text-5xl font-bold">${data.product.price}</h4>
+        <h4 className="text-5xl font-semibold">${data.product.price}</h4>
         <Form method="post">
           <label className="font-semibold text-lg" htmlFor="quantity">
             Select Quantity
