@@ -20,9 +20,8 @@ import stylesheet from '~/tailwind.css';
 
 import Navbar from './components/navbar';
 import Footer from './components/footer';
-import getOrCreateCart from './utils/createCart';
 import { db } from './utils/db.server';
-import { commitSession, getSession } from './sessions';
+import { getSession } from './sessions';
 import createCart from './utils/createCart';
 // import { ReactNode } from 'react';
 // import type { PropsWithChildren } from 'react';
@@ -93,7 +92,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function App() {
   const { cartItemCount } = useLoaderData<typeof loader>();
-  console.log(cartItemCount);
 
   return (
     <html lang="en">

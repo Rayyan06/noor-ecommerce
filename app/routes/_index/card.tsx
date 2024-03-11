@@ -1,4 +1,5 @@
 import { Link } from '@remix-run/react';
+import banner from '../../../public/images/banner.jpeg';
 
 type CardProps = {
   mainText: string;
@@ -11,18 +12,16 @@ export default function Card({ mainText, buttonText }: CardProps) {
       <div
         className="flex items-center bg-cover bg-center h-screen"
         style={{
-          backgroundImage: "url('/public/images/banner.jpeg')",
+          backgroundImage: `url(${banner})`,
         }}
       >
-        <img
-          src={`public/images/banner.jpeg`}
-          alt={'banner'}
-          className="h-full w-full absolute"
-        ></img>
-        <div className="container mx-auto text-center text-black">
-          <h1 className="text-6xl font-semibold">{mainText}</h1>
+        {/* <img src={banner} alt={'banner'} className="h-full"></img> */}
+        <div className="container mx-auto text-center ">
+          <h1 className="text-6xl font-semibold text-white mb-10">
+            {mainText}
+          </h1>
           <Link
-            className="py-2 px-5 bg-blue-400 shadow-md hover:bg-orange-700 font-bold font-serif text-white rounded "
+            className="py-3 px-5 bg-black shadow-md hover:bg-gray-800 font-bold active:bg-gray-700 text-lg text-white rounded-sm "
             to="products"
           >
             {buttonText}
