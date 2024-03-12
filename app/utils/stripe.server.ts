@@ -24,6 +24,11 @@ export const getStripeSession = async (
     return {
       price: item.product!.stripeProductId,
       quantity: item.quantity,
+      adjustable_quantity: {
+        enabled: true,
+        minimum: 1,
+        maximum: 20,
+      },
     };
   });
 
