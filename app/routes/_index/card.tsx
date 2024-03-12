@@ -1,5 +1,5 @@
 import { Link } from '@remix-run/react';
-import banner from '../../../public/images/banner.jpeg';
+import banner from '/images/banner.jpeg';
 
 type CardProps = {
   mainText: string;

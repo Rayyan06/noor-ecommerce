@@ -8,10 +8,12 @@ import QuantityPicker from '~/components/quantityPicker';
 import { getSession } from '~/sessions';
 import { db } from '~/utils/db.server';
 import CartItemCard from './cartItemCard';
+import createCart from '~/utils/createCart';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get('Cookie'));
   const cartId = session.get('cartId');
+  if (!cartId) createCart(session);
   const cartItems = await db.cartItem.findMany({
     where: {
       cartId: cartId,
@@ -58,9 +60,12 @@ export default function Cart() {
               </div>
             </ul>
             <div className="mt-10 flex justify-end">
-              <button className="bg-black text-white py-2 px-5 rounded-sm text-xl">
+              <Link
+                to="/checkout"
+                className="bg-black text-white py-2 px-5 rounded-sm text-xl"
+              >
                 CHECKOUT
-              </button>
+              </Link>
             </div>
           </>
         ) : (
@@ -98,8 +103,6 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const quantity = Number(formData.get('quantity'));
 
-  console.log('Quantity: ' + quantity);
-
   interface Error {
     quantity?: string;
   }
@@ -117,7 +120,7 @@ export async function action({ request }: ActionFunctionArgs) {
       cartId: cartId,
     },
     data: {
-      quantity: quantity, // Set the quantity
+      quantity: Number(quantity), // Set the quantity
     },
   });
 

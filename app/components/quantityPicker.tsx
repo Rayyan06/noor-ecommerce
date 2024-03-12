@@ -12,7 +12,9 @@ export default function QuantityPicker({
   submitOnChange = false,
 }: QuantityPickerProps) {
   const updateQuantity = (newQuantity: number) => {
-    if (quantity > 0 && quantity < maxQuantity) setQuantity(newQuantity);
+    if (newQuantity > 0 && newQuantity < 20) {
+      setQuantity(newQuantity);
+    }
   };
   return (
     <div className="flex items-center">
@@ -25,14 +27,13 @@ export default function QuantityPicker({
       </button>
       <input
         className="block border-0 w-16 h-full py-2.5 ring-0 ring-inset items-center justify-center text-center ring-gray-300 focus:ring-2 focus:ring-gray-200 bg-white"
-        type="number"
+        type={'number'}
         value={quantity}
+        name="quantity"
+        id="quantity"
         onChange={(e) => {
           updateQuantity(Number(e.target.value));
         }}
-        name="quantity"
-        id="quantity"
-        disabled={submitOnChange}
       />
 
       <button

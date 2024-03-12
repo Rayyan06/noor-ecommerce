@@ -15,13 +15,13 @@ import {
   // isRouteErrorResponse,
 } from '@remix-run/react';
 
-import stylesheet from '~/tailwind.css';
+import '~/styles/tailwind.css';
 
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import { db } from './utils/db.server';
 import { getSession } from './sessions';
-import createCart from './utils/createCart';
+import createCart from '~/utils/createCart';
 import { useState } from 'react';
 // import { ReactNode } from 'react';
 // import type { PropsWithChildren } from 'react';
@@ -35,9 +35,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: stylesheet },
-];
+export const links: LinksFunction = () => [];
 
 // export function Layout({ children }: PropsWithChildren) {
 //   return (

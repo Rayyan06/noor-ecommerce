@@ -1,12 +1,5 @@
 import { Link } from '@remix-run/react';
-
-interface Product {
-  imageName: string | null;
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-}
+import { Product } from '~/lib/interface';
 
 interface ProductCardProps {
   product: Product;
