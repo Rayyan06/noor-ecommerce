@@ -3,8 +3,7 @@ import {
   json,
   type LoaderFunctionArgs,
 } from '@remix-run/node';
-import { Link, useLoaderData } from '@remix-run/react';
-import QuantityPicker from '~/components/quantityPicker';
+import { Form, Link, useLoaderData } from '@remix-run/react';
 import { getSession } from '~/sessions';
 import { db } from '~/utils/db.server';
 import CartItemCard from './cartItemCard';
@@ -60,12 +59,14 @@ export default function Cart() {
               </div>
             </ul>
             <div className="mt-10 flex justify-end">
-              <Link
-                to="/checkout"
-                className="bg-black text-white py-2 px-5 rounded-sm text-xl"
-              >
-                CHECKOUT
-              </Link>
+              <Form method="post" action="/checkout">
+                <button
+                  type="submit"
+                  className="bg-black text-white py-2 px-5 rounded-sm text-xl"
+                >
+                  CHECKOUT
+                </button>
+              </Form>
             </div>
           </>
         ) : (

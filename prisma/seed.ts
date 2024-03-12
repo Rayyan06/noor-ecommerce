@@ -21,12 +21,14 @@ function getProducts() {
       description: 'Top Quality picture frame in various sizes',
       price: 300,
       imageName: 'PictureFrame.jpg',
+      stripeProductId: 'price_1OtXjJDZ94ZbWteP1t4hg5nr',
     },
     {
       name: 'Throw Pillow Set',
       description: 'Luxurious set of throw pillows to enhance your sofa or bed',
       price: 50,
       imageName: 'ThrowPillowSet.jpg',
+      stripeProductId: 'price_1OtY2rDZ94ZbWtePntSzMGeo',
     },
     {
       name: 'Wall Clock',
@@ -34,6 +36,7 @@ function getProducts() {
         'Elegant wall clock with silent mechanism for a peaceful atmosphere',
       price: 100,
       imageName: 'WallClock.jpg',
+      stripeProductId: 'price_1OtY2XDZ94ZbWtePmyXejpmD',
     },
 
     {
@@ -41,6 +44,7 @@ function getProducts() {
       description: 'Soft and plush faux fur throw blanket for chilly evenings',
       price: 70,
       imageName: 'FauxFurThrowBlanket.jpg',
+      stripeProductId: 'price_1OtY3hDZ94ZbWteP6RtNupxK',
     },
   ];
 }

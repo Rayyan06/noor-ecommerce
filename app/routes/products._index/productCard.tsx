@@ -1,5 +1,5 @@
 import { Link } from '@remix-run/react';
-import { Product } from '~/lib/interface';
+import { Product } from '~/utils/interface';
 
 interface ProductCardProps {
   product: Product;

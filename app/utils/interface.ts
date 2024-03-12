@@ -6,7 +6,8 @@ export interface Product {
   description: string;
   price: number;
   imageName?: string | null;
-  cartItems: CartItem[];
+  cartItems?: CartItem[];
+  stripeProductId: string;
 }
 
 export interface Cart {
@@ -18,7 +19,7 @@ export interface CartItem {
   id: string;
   cartId: number;
   productId: string;
-  cart: Cart;
+  cart?: Cart;
   product: Product;
   quantity: number;
 }
