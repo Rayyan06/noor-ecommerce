@@ -15,10 +15,10 @@ export default function CartItemCard({ item }: any) {
 
   return (
     <li
-      className="flex flex-row items-start justify-between py-5"
+      className="flex flex-col md:flex-row md:items-start justify-between py-5"
       key={item.id}
     >
-      <div className="flex flex-row space-x-10">
+      <div className="flex flex-col md:flex-row justify-center items-center space-x-5 md:space-x-10">
         <Link
           key={item.id}
           to={`/products/${item.product.id}`}
@@ -30,14 +30,16 @@ export default function CartItemCard({ item }: any) {
             className="max-w-72"
           />
         </Link>
-        <div className="flex flex-col justify-between py-5">
+        <div className="flex flex-col justify-between md:py-5">
           <div>
             <Link
               key={item.id}
               to={`/products/${item.product.id}`}
               prefetch="intent"
             >
-              <h2 className="text-3xl font-semibold">{item.product.name}</h2>
+              <h2 className="text-2xl md:text-3xl font-semibold">
+                {item.product.name}
+              </h2>
             </Link>
             <h2 className="">{item.product.description}</h2>
             <p className="text-green-500">In Stock</p>
@@ -59,20 +61,20 @@ export default function CartItemCard({ item }: any) {
           <deleteFetcher.Form method="delete">
             <button
               type="submit"
-              className=" fill-red-500 hover:fill-red-600 text-red-500 hover:text-red-600  rounded-lg font-semibold flex flex-row space-x-1"
+              className=" fill-red-500 hover:fill-red-600 text-red-500 hover:text-red-600 rounded-lg font-semibold flex flex-row space-x-1"
               disabled={isDeleting}
             >
               <Trash />
               <input type="hidden" value={item.id} name="itemId" />
-              <span>Delete Item</span>
+              <span className="hidden md:block">Delete Item</span>
             </button>
           </deleteFetcher.Form>
-          <h3 className="font-bold text-2xl sm:block md:hidden">
+          <h3 className="font-bold text-2xl block md:hidden">
             ${item.product.price}.00
           </h3>
         </div>
       </div>
-      <div className="sm:hidden md:flex">
+      <div className="hidden md:flex">
         <h3 className="font-bold text-2xl">${item.product.price}.00</h3>
       </div>
     </li>

@@ -9,6 +9,7 @@ import {
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   to?: string;
   isSubmitting?: boolean;
+  grow?: boolean;
   Icon?: ComponentType<SVGProps<SVGSVGElement>>;
 }
 
@@ -17,10 +18,12 @@ function Button({
   children,
   Icon,
   isSubmitting,
+  grow = false,
   ...buttonProps
 }: PropsWithChildren<ButtonProps>) {
-  const styleClasses =
-    'flex items-center py-3 px-5 bg-blue-400 shadow-md hover:bg-blue-600 font-bold active:bg-blue-700 text-lg text-white rounded-xl';
+  const styleClasses = `flex items-center justify-center py-2 md:py-3 px-5 bg-blue-400 shadow-md hover:bg-blue-600 font-bold active:bg-blue-700 text-md md:text-lg text-white rounded-xl ${
+    grow && 'w-full'
+  }`;
 
   return (
     <>

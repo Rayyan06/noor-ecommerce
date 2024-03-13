@@ -17,16 +17,16 @@ export default function QuantityPicker({
     }
   };
   return (
-    <div className="flex items-center">
+    <div className="grid grid-rows-1 grid-cols-3 items-center h-10 w-full md:w-48">
       <button
-        className="px-4 py-2 hover:shadow-sm font-bold text-lg hover:text-teal-500 hover:bg-gray-100 hover:font-bold"
+        className="flex items-center justify-center rounded-l-md h-full border-2 hover:shadow-sm font-semibold text-xl hover:text-teal-500 hover:bg-gray-100"
         onClick={() => updateQuantity(quantity - 1)}
         type={submitOnChange ? 'submit' : 'button'}
       >
         -
       </button>
       <input
-        className="block border-0 w-16 h-full py-2.5 ring-0 ring-inset items-center justify-center text-center ring-gray-300 focus:ring-2 focus:ring-gray-200 bg-white"
+        className=" border-y-2 h-10  py-2.5 ring-0 ring-inset items-center justify-center text-center ring-gray-300 focus:ring-2 focus:ring-gray-200 bg-white"
         type={'number'}
         value={quantity}
         name="quantity"
@@ -37,7 +37,7 @@ export default function QuantityPicker({
       />
 
       <button
-        className="px-4 py-2 hover:shadow-sm font-bold text-lg hover:text-teal-500 hover:bg-gray-100 hover:font-bold"
+        className=" flex items-center justify-center rounded-r-md h-full border-2 hover:shadow-sm font-semibold text-xl hover:text-teal-500 hover:bg-gray-100"
         onClick={() => updateQuantity(quantity + 1)}
         type={submitOnChange ? 'submit' : 'button'}
       >

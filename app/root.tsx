@@ -95,9 +95,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body
-        className={isCollapsed ? '' : 'overflow-y-hidden md:overflow-y-auto'}
-      >
+      <body className="min-h-vh flex flex-col">
         <header>
           <Navbar
             cartItemCount={cartItemCount}

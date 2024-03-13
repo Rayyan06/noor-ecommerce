@@ -25,19 +25,23 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
 
   return (
-    <div className="flex flex-col items-center md:items-start md:flex-row justify-center m-12 md:m-16 lg:m-24">
-      <div className="max-w-96 md:mr-20">
+    <div className="flex flex-col items-center md:items-start md:flex-row justify-center m-0 md:my-12 lg:m-24">
+      <div className="max-w-96 md:mr-10 lg:mr-20">
         <img src={`images/${data.product.imageName}`} alt={data.product.name} />
       </div>
-      <div className="flex flex-col p-3 space-y-3 mt-3 md:mt-0 md:w-2/5 justify-center">
-        <h1 className="text-5xl font-serif">{data.product.name}</h1>
-        <h3 className="text-lg">{data.product.description}</h3>
-        <h4 className="text-5xl font-semibold">${data.product.price}</h4>
+      <div className="flex flex-col p-5 md:p-0 space-y-3 mt-3 md:mt-0 md:w-2/5 justify-center">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif">
+          {data.product.name}
+        </h1>
+        <h3 className="text-md md:text-lg">{data.product.description}</h3>
+        <h4 className="text-3xl md:text-5xl font-semibold">
+          ${data.product.price}
+        </h4>
         <Form method="post">
           <label className="font-semibold text-lg" htmlFor="quantity">
             Select Quantity
           </label>
-          <div className="flex items-center my-2">
+          <div className="flex items-center mt-2 mb-4">
             <QuantityPicker
               quantity={quantity}
               setQuantity={setQuantity}
@@ -50,8 +54,11 @@ export default function ProductDetail() {
               )}
             </div>
           </div>
-
-          <Button type="submit">ADD TO CART</Button>
+          <div className="flex">
+            <Button type="submit" grow={true}>
+              ADD TO CART
+            </Button>
+          </div>
         </Form>
       </div>
     </div>

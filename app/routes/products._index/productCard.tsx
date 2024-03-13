@@ -12,11 +12,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         <img
           src={`products/images/${product.imageName}`}
           alt={product.name}
-          className="rounded-xl"
+          className="rounded-md md:rounded-xl"
         ></img>
-        <div className="text-center mt-2">
-          <h3 className="text-xl font-serif ">{product.name}</h3>
-          <h3>${product.price}</h3>
+        <div className="text-center mt-1 md:mt-2">
+          <h3 className="text-sm md:text-xl font-serif ">{product.name}</h3>
+          <h3 className="text-sm md:text-lg">${product.price}</h3>
         </div>
       </Link>
     </div>

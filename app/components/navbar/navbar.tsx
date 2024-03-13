@@ -1,5 +1,4 @@
-import { Link, NavLink } from '@remix-run/react';
-import { useState } from 'react';
+import { Link } from '@remix-run/react';
 // import AccountCircle from './icons/AccountCircle';
 import ShoppingCartOutlined from '../icons/ShoppingCartOutlined';
 import Menu from '../icons/Menu';
@@ -23,18 +22,22 @@ export default function Navbar({
     setIsCollapsed(!isCollapsed);
   };
 
-  const iconWidth = 50;
+  const iconWidth = 24;
 
   return (
-    <nav className="bg-white py-4 mx-8">
+    <nav className="bg-white mx-4 md:mx-8">
       {/* Top Navigation Bar, always showing */}
-      <div className="container h-20 mx-auto flex flex-row items-center justify-between text-black font-serif">
-        <div className={`block lg:hidden ${!isCollapsed && 'z-40'}`}>
+      <div className="container h-16 lg:h-28 mx-auto flex flex-row items-center justify-between text-black font-serif">
+        <div
+          className={`flex w-2/12 md:w-3/12 lg:hidden ${
+            !isCollapsed && 'z-40'
+          }`}
+        >
           <button onClick={toggleMenu} className="text-white">
             {isCollapsed ? (
               <Menu width={iconWidth} />
             ) : (
-              <Close width={iconWidth} />
+              <Close className="fixed top-7" width={iconWidth} />
             )}
           </button>
         </div>
@@ -45,28 +48,30 @@ export default function Navbar({
           <Link className="hidden lg:block" to="https://facebook.com">
             <FacebookIcon filter="grayscale(100%)" width={25} />
           </Link>
-          <Link
-            className="hidden lg:block self-center"
-            to="https://youtube.com"
-          >
-            <Youtube className="fill-red-300" width={25} />
+          <Link className="hidden lg:flex my-auto" to="https://youtube.com">
+            <Youtube className="fill-red-300 " width={25} />
           </Link>
         </span>
 
         {/*-- Logo Name */}
-        <div className="flex">
-          <Link to="/" className="text-4xl mx-auto italic">
+        <div className="flex mx-auto w-8/12 md:w-6-12">
+          <Link to="/" className="text-3xl lg:text-4xl mx-auto italic">
             NoorHadia
           </Link>
         </div>
-        <div className="hidden lg:flex w-3/12"></div>
-        <Link className="flex lg:hidden" to="/cart">
-          <ShoppingCartOutlined />({cartItemCount})
+        <Link
+          className="flex w-2/12 md:w-3/12 justify-end text-lg md:text-xl items-center"
+          to="/cart"
+        >
+          <ShoppingCartOutlined />
+          <span className="hidden md:block ml-1">Cart({cartItemCount})</span>
         </Link>
       </div>
 
+      <hr />
+
       {/* Subnavigation, hidden on mobile */}
-      <div className="container h-20 mx-auto hidden lg:flex justify-between items-center text-black font-serif">
+      <div className="container h-20 mx-auto hidden lg:flex justify-center items-center text-black text-xl font-serif">
         {/* Navigation links */}
         <ul
           className={`hidden lg:flex space-x-12 ${
@@ -86,20 +91,20 @@ export default function Navbar({
 
               <span className="ml-1">Login</span>
             </Link>
-          </li> */}
+          </li> 
           <li className="flex space-x-1">
             <Link className="flex" to="/cart" prefetch="intent">
               <ShoppingCartOutlined />
               <span className="ml-1">Cart({cartItemCount})</span>
             </Link>
           </li>
+          */}
         </ul>
       </div>
-
       {/* Mobile Menu */}
       <ul
-        className={`lg:hidden h-full gap-y-2 flex flex-col items-center justify-center fixed overflow-y-hidden bg-white opacity-90 text-3xl font-serif space-y-5 transition duration-1000 left-0 top-0 bottom-0 z-30 ${
-          isCollapsed ? 'w-0' : 'w-full'
+        className={`lg:hidden h-full gap-y-5 flex flex-col items-center justify-center fixed bg-white opacity-90 text-3xl font-serif space-y-5 transition duration-1000 left-0 top-0 bottom-0 z-30 ${
+          isCollapsed ? 'hidden' : 'w-full'
         }`}
       >
         <NavItem to="/" onClick={() => setIsCollapsed(true)}>
