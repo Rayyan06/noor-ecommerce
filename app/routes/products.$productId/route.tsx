@@ -2,6 +2,7 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { json, redirect } from '@remix-run/node';
 import { Form, useActionData, useLoaderData } from '@remix-run/react';
 import { useState } from 'react';
+import Button from '~/components/button';
 import QuantityPicker from '~/components/quantityPicker';
 import { getSession } from '~/sessions';
 
@@ -36,7 +37,7 @@ export default function ProductDetail() {
           <label className="font-semibold text-lg" htmlFor="quantity">
             Select Quantity
           </label>
-          <div className="flex items-center mt-2">
+          <div className="flex items-center my-2">
             <QuantityPicker
               quantity={quantity}
               setQuantity={setQuantity}
@@ -50,12 +51,7 @@ export default function ProductDetail() {
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="bg-black text-white p-3 font-bold hover:bg-gray-500 mt-5"
-          >
-            ADD TO CART
-          </button>
+          <Button type="submit">ADD TO CART</Button>
         </Form>
       </div>
     </div>

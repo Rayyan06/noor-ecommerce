@@ -3,11 +3,13 @@ import {
   json,
   type LoaderFunctionArgs,
 } from '@remix-run/node';
-import { Form, Link, useLoaderData } from '@remix-run/react';
+import { Form, Link, useLoaderData, useNavigation } from '@remix-run/react';
 import { getSession } from '~/sessions';
 import { db } from '~/utils/db.server';
 import CartItemCard from './cartItemCard';
 import createCart from '~/utils/createCart';
+import Button from '~/components/button';
+import ShoppingCartCheckout from '~/components/icons/ShoppingCartCheckout';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get('Cookie'));
@@ -36,6 +38,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function Cart() {
   const { subTotal, cartItems, itemCount } = useLoaderData<typeof loader>();
 
+  const navigation = useNavigation();
+  // important to check you're submitting to the action
+  // for the pending UI, not just any action
+  const isSubmittingCheckout = navigation.formAction === '/checkout';
+
   return (
     <div className="flex flex-col sm:mx-6 mx-12 lg:mx-24 xl:mx-36">
       <div className="flex flex-row w-full justify-between items-center">
@@ -60,12 +67,13 @@ export default function Cart() {
             </ul>
             <div className="mt-10 flex justify-end">
               <Form method="post" action="/checkout">
-                <button
+                <Button
                   type="submit"
-                  className="bg-black text-white py-2 px-5 rounded-sm text-xl"
+                  Icon={ShoppingCartCheckout}
+                  isSubmitting={isSubmittingCheckout}
                 >
                   CHECKOUT
-                </button>
+                </Button>
               </Form>
             </div>
           </>
@@ -92,8 +100,6 @@ export async function action({ request }: ActionFunctionArgs) {
   const session = await getSession(request.headers.get('Cookie'));
   const cartId = await session.get('cartId');
   const itemId = String(formData.get('itemId'));
-
-  console.log(`itemId: ${itemId}`);
 
   if (request.method === 'DELETE') {
     await db.cartItem.delete({ where: { id: itemId, cartId: cartId } });

@@ -17,7 +17,7 @@ import {
 
 import '~/styles/tailwind.css';
 
-import Navbar from './components/navbar';
+import Navbar from './components/navbar/navbar';
 import Footer from './components/footer';
 import { db } from './utils/db.server';
 import { getSession } from './sessions';
