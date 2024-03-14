@@ -2,7 +2,7 @@ import { Link, useActionData, useFetcher } from '@remix-run/react';
 import { useState } from 'react';
 import Trash from '~/components/icons/Trash';
 import QuantityPicker from '~/components/quantityPicker';
-import { action } from '~/routes/cart.$itemId';
+import { action } from './route';
 
 export default function CartItemCard({ item }: any) {
   const quantityFetcher = useFetcher();
@@ -18,7 +18,7 @@ export default function CartItemCard({ item }: any) {
       className="flex flex-col md:flex-row md:items-start justify-between py-5"
       key={item.id}
     >
-      <div className="flex flex-col md:flex-row justify-center items-center space-x-5 md:space-x-10">
+      <div className="flex flex-col md:flex-row justify-between items-center space-x-5 md:space-x-10">
         <Link
           key={item.id}
           to={`/products/${item.product.id}`}
@@ -30,8 +30,8 @@ export default function CartItemCard({ item }: any) {
             className="max-w-72"
           />
         </Link>
-        <div className="flex flex-col justify-between md:py-5">
-          <div>
+        <div className="flex flex-col justify-between space-y-3 md:py-5">
+          <div className="mb-2">
             <Link
               key={item.id}
               to={`/products/${item.product.id}`}

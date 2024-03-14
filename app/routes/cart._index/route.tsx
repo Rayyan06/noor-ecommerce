@@ -94,7 +94,9 @@ export default function Cart() {
   );
 }
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({
+  request,
+}: ActionFunctionArgs): Promise<Response> {
   const formData = await request.formData();
 
   const session = await getSession(request.headers.get('Cookie'));

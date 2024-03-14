@@ -1,8 +1,9 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
-import { json, redirect } from '@remix-run/node';
-import { Form, useActionData, useLoaderData } from '@remix-run/react';
+import { json } from '@remix-run/node';
+import { Form, Link, useActionData, useLoaderData } from '@remix-run/react';
 import { useState } from 'react';
 import Button from '~/components/button';
+import InfoMessage from '~/components/infoMessage';
 import QuantityPicker from '~/components/quantityPicker';
 import { getSession } from '~/sessions';
 
@@ -14,8 +15,9 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   });
 
   if (!product) {
-    throw new Error('Product not found');
+    throw json('Product not found', { status: 404 });
   }
+
   return json({ product });
 };
 
@@ -24,42 +26,70 @@ export default function ProductDetail() {
   const actionData = useActionData<typeof action>();
   const [quantity, setQuantity] = useState(1);
 
-  return (
-    <div className="flex flex-col items-center md:items-start md:flex-row justify-center m-0 md:my-12 lg:m-24">
-      <div className="max-w-96 md:mr-10 lg:mr-20">
-        <img src={`images/${data.product.imageName}`} alt={data.product.name} />
-      </div>
-      <div className="flex flex-col p-5 md:p-0 space-y-3 mt-3 md:mt-0 md:w-2/5 justify-center">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif">
-          {data.product.name}
-        </h1>
-        <h3 className="text-md md:text-lg">{data.product.description}</h3>
-        <h4 className="text-3xl md:text-5xl font-semibold">
-          ${data.product.price}
-        </h4>
-        <Form method="post">
-          <label className="font-semibold text-lg" htmlFor="quantity">
-            Select Quantity
-          </label>
-          <div className="flex items-center mt-2 mb-4">
-            <QuantityPicker
-              quantity={quantity}
-              setQuantity={setQuantity}
-              maxQuantity={20}
-            />
+  // Is the dialog box visible?
+  const [isMessageVisible, setIsMessageVisible] = useState(false);
 
-            <div>
-              {actionData?.errors?.quantity && (
-                <em>{actionData?.errors?.quantity}</em>
-              )}
+  return (
+    <div className="mx-8 md:mx-12 lg:mx-24 mt-8 mb-24">
+      {actionData?.success && (
+        <InfoMessage
+          isVisible={isMessageVisible}
+          onClose={() => setIsMessageVisible(false)}
+        >
+          <span className="text-md">
+            {actionData.quantity} {data.product.name}
+            {actionData.quantity > 1 ? 's were ' : ' was '} successfully added
+            to your cart.{' '}
+            <Link to="/cart" className="underline">
+              {' '}
+              View Cart
+            </Link>
+          </span>
+        </InfoMessage>
+      )}
+      <div className="flex flex-col items-center md:items-start md:flex-row justify-center mt-4">
+        <div className="md:max-w-96 md:mr-10 lg:mr-20">
+          <img
+            src={`images/${data.product.imageName}`}
+            alt={data.product.name}
+          />
+        </div>
+        <div className="flex flex-col p-5 md:p-0 space-y-3 mt-3 md:mt-0 md:w-2/5 justify-center">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif">
+            {data.product.name}
+          </h1>
+          <h3 className="text-md md:text-lg">{data.product.description}</h3>
+          <h4 className="text-3xl md:text-5xl font-semibold">
+            ${data.product.price}
+          </h4>
+          <Form method="post">
+            <label className="font-semibold text-lg" htmlFor="quantity">
+              Select Quantity
+            </label>
+            <div className="flex items-center mt-2 mb-5">
+              <QuantityPicker
+                quantity={quantity}
+                setQuantity={setQuantity}
+                maxQuantity={20}
+              />
+
+              <div>
+                {actionData?.errors?.quantity && (
+                  <em>{actionData?.errors?.quantity}</em>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="flex">
-            <Button type="submit" grow={true}>
-              ADD TO CART
-            </Button>
-          </div>
-        </Form>
+            <div className="flex w-full md:w-1/2">
+              <Button
+                type="submit"
+                onClick={() => setIsMessageVisible(true)}
+                grow={true}
+              >
+                ADD TO CART
+              </Button>
+            </div>
+          </Form>
+        </div>
       </div>
     </div>
   );
@@ -120,5 +150,5 @@ export async function action({ params, request }: ActionFunctionArgs) {
     });
   }
 
-  return redirect('/cart');
+  return json({ success: true, quantity: quantity }, { status: 201 });
 }

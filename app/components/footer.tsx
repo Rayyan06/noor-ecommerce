@@ -2,7 +2,7 @@ import { Link } from '@remix-run/react';
 
 export default function Footer() {
   return (
-    <section className="h-60 flex flex-row items-center justify-around p-5 bg-gray-200 mt-auto">
+    <section className="h-36 md:h-60 flex flex-row items-center justify-around p-5 bg-gray-200 mt-auto">
       <div>
         <h1 className="font-serif italic text-3xl">NoorHadia</h1>
       </div>
