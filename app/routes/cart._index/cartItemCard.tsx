@@ -61,7 +61,7 @@ export default function CartItemCard({ item }: any) {
           <deleteFetcher.Form method="delete">
             <button
               type="submit"
-              className=" fill-red-500 hover:fill-red-600 text-red-500 hover:text-red-600 rounded-lg font-semibold flex flex-row space-x-1"
+              className=" fill-red-500 hover:fill-red-600 text-red-500 hover:text-red-600 border-2 border-red-500 py-2 px-3 rounded-lg font-semibold flex flex-row space-x-1"
               disabled={isDeleting}
             >
               <Trash />

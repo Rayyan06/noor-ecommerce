@@ -25,14 +25,10 @@ export default function Navbar({
   const iconWidth = 24;
 
   return (
-    <nav className="bg-white mx-4 md:mx-8">
+    <nav>
       {/* Top Navigation Bar, always showing */}
-      <div className="container h-16 lg:h-28 mx-auto flex flex-row items-center justify-between text-black font-serif">
-        <div
-          className={`flex w-2/12 md:w-3/12 lg:hidden ${
-            !isCollapsed && 'z-40'
-          }`}
-        >
+      <div className="h-16 lg:h-28 px-4 md:px-8 flex flex-row items-center justify-between text-black font-serif">
+        <div className={`flex lg:hidden ${!isCollapsed && 'z-40'}`}>
           <button onClick={toggleMenu} className="text-white">
             {isCollapsed ? (
               <Menu width={iconWidth} />
@@ -41,30 +37,37 @@ export default function Navbar({
             )}
           </button>
         </div>
-        <span className="hidden lg:flex space-x-3 w-3/12">
+        <span className="hidden lg:flex space-x-3 bg-none">
           <Link className="hidden lg:block" to="https://instagram.com">
-            <InstagramIcon width={25} />
+            <InstagramIcon strokeOpacity={0} width={25} />
           </Link>
-          <Link className="hidden lg:block" to="https://facebook.com">
-            <FacebookIcon filter="grayscale(100%)" width={25} />
+          <Link className="hidden lg:block bg-none" to="https://facebook.com">
+            <FacebookIcon
+              strokeOpacity={0}
+              filter="grayscale(100%)"
+              width={25}
+            />
           </Link>
           <Link className="hidden lg:flex my-auto" to="https://youtube.com">
-            <Youtube className="fill-red-300 " width={25} />
+            <Youtube strokeOpacity={0} className="fill-red-300 " width={25} />
           </Link>
         </span>
 
         {/*-- Logo Name */}
-        <div className="flex mx-auto w-8/12 md:w-6-12">
-          <Link to="/" className="text-3xl lg:text-4xl mx-auto italic">
+        <div className="flex absolute mx-auto w-48 py-3 left-0 right-0">
+          <Link
+            to="/"
+            className="text-3xl lg:text-4xl mx-auto italic hover:text-violet-500"
+          >
             NoorHadia
           </Link>
         </div>
         <Link
-          className="flex w-2/12 md:w-3/12 justify-end text-lg md:text-xl items-center"
+          className="flex justify-end text-lg md:text-xl items-center hover:text-violet-500 hover:fill-violet-500"
           to="/cart"
         >
           <ShoppingCartOutlined />
-          <span className="hidden md:block ml-1">Cart({cartItemCount})</span>
+          <span className="hidden md:block ml-1 ">Cart({cartItemCount})</span>
         </Link>
       </div>
 

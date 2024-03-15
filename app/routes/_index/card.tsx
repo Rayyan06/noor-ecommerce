@@ -18,7 +18,7 @@ export default function Card({ mainText, buttonText }: CardProps) {
       >
         {/* <img src={banner} alt={'banner'} className="h-full"></img> */}
         <div className="container mx-auto text-center flex flex-col items-center">
-          <h1 className="text-3xl md:text-4xl lg:text-6xl font-semibold text-white mb-2 lg:mb-10">
+          <h1 className="text-3xl md:text-4xl lg:text-6xl font-semibold text-white mb-2 lg:mb-4">
             {mainText}
           </h1>
           <div className="min-w-2/12">

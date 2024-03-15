@@ -10,8 +10,7 @@ type InfoMessageProps = {
 function InfoMessage({ children, isVisible, onClose }: InfoMessageProps) {
   if (isVisible) {
     return (
-      <div className="flex flex-row px-3 py-3 w-full rounded-md bg-green-200 items-center justify-between">
-        <Done />
+      <div className="flex flex-row px-3 py-3 w-full rounded-md bg-green-200 items-center justify-between animate-fadeIn">
         {children}
         <button onClick={onClose}>
           <Close />

@@ -3,6 +3,7 @@ import { json } from '@remix-run/node';
 import { Form, Link, useActionData, useLoaderData } from '@remix-run/react';
 import { useState } from 'react';
 import Button from '~/components/button';
+import ShoppingCartOutlined from '~/components/icons/ShoppingCartOutlined';
 import InfoMessage from '~/components/infoMessage';
 import QuantityPicker from '~/components/quantityPicker';
 import { getSession } from '~/sessions';
@@ -30,24 +31,27 @@ export default function ProductDetail() {
   const [isMessageVisible, setIsMessageVisible] = useState(false);
 
   return (
-    <div className="mx-8 md:mx-12 lg:mx-24 mt-8 mb-24">
-      {actionData?.success && (
-        <InfoMessage
-          isVisible={isMessageVisible}
-          onClose={() => setIsMessageVisible(false)}
-        >
-          <span className="text-md">
-            {actionData.quantity} {data.product.name}
-            {actionData.quantity > 1 ? 's were ' : ' was '} successfully added
-            to your cart.{' '}
-            <Link to="/cart" className="underline">
-              {' '}
-              View Cart
-            </Link>
-          </span>
-        </InfoMessage>
-      )}
-      <div className="flex flex-col items-center md:items-start md:flex-row justify-center mt-4">
+    <div className="mx-8 md:mx-12 lg:mx-24 mb-24 pt-8 lg:pt-0">
+      <div className="h-10">
+        {actionData?.success && (
+          <InfoMessage
+            isVisible={isMessageVisible}
+            onClose={() => setIsMessageVisible(false)}
+          >
+            <ShoppingCartOutlined />
+            <span className="text-md">
+              {actionData.quantity} {data.product.name}
+              {actionData.quantity > 1 ? 's were ' : ' was '} successfully added
+              to your cart.{' '}
+              <Link to="/cart" className="underline hover:text-violet-300">
+                {' '}
+                View Cart
+              </Link>
+            </span>
+          </InfoMessage>
+        )}
+      </div>
+      <div className="flex flex-col items-center md:items-start md:flex-row justify-center mt-8">
         <div className="md:max-w-96 md:mr-10 lg:mr-20">
           <img
             src={`images/${data.product.imageName}`}

@@ -95,7 +95,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-vh flex flex-col">
+      <body className="min-h-vh flex flex-col scroll-auto">
         <header>
           <Navbar
             cartItemCount={cartItemCount}
@@ -103,7 +103,7 @@ export default function App() {
             setIsCollapsed={setIsCollapsed}
           />
         </header>
-        <main>
+        <main className="min-h-screen">
           <Outlet />
         </main>
         <ScrollRestoration />

@@ -14,7 +14,7 @@ export const loader = async () => {
 export default function Products() {
   const data = useLoaderData<typeof loader>();
   return (
-    <div className="m-12 md:m-16 lg:m-24">
+    <div className="mx-12 py-6 md:mx-16 lg:mx-24">
       <h1 className="text-5xl font-serif mb-5">Products</h1>
       <hr />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-12 justify-center mt-5 ">

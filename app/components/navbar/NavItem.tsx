@@ -9,7 +9,11 @@ export default function NavItem({
     <li>
       <NavLink
         className={({ isActive, isPending }) =>
-          isPending ? '' : isActive ? 'underline' : ''
+          isPending
+            ? ''
+            : isActive
+            ? 'underline hover:text-violet-300'
+            : 'hover:text-violet-400'
         }
         {...props}
       >

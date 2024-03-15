@@ -36,7 +36,7 @@ export const getStripeSession = async (
     mode: 'payment',
     payment_method_types: ['card'],
     line_items: lineItems,
-    success_url: `${domainUrl}/payment/success`,
+    success_url: `${domainUrl}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${domainUrl}/payment/cancel`,
   });
   return session.url as string;
