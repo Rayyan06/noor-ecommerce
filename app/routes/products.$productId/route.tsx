@@ -1,5 +1,5 @@
-import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
-import { json } from '@remix-run/node';
+import type { ActionFunctionArgs, LoaderFunctionArgs } from '@vercel/remix';
+import { json } from '@vercel/remix';
 import { Form, Link, useActionData, useLoaderData } from '@remix-run/react';
 import { useState } from 'react';
 import Button from '~/components/button';

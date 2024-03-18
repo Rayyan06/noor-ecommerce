@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, json, redirect } from '@remix-run/node';
+import { ActionFunctionArgs, json, redirect } from '@vercel/remix';
 import { getDomainUrl, getStripeSession } from '~/utils/stripe.server';
 import { getSession } from '~/sessions';
 import getCartItems from '~/utils/getCartItems';

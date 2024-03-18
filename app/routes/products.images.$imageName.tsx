@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs } from '@remix-run/node';
+import { LoaderFunctionArgs } from '@vercel/remix';
 import fs from 'fs';
 import path from 'path';
 

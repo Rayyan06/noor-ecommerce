@@ -2,7 +2,7 @@ import type {
   MetaFunction,
   LinksFunction,
   LoaderFunctionArgs,
-} from '@remix-run/node';
+} from '@vercel/remix';
 import {
   Outlet,
   Links,

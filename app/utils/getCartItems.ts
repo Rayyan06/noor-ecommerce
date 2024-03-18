@@ -1,4 +1,4 @@
-import { Session } from '@remix-run/node';
+import { Session } from '@vercel/remix';
 import { SessionData, SessionFlashData } from '~/sessions';
 import { db } from './db.server';
 import type { CartItem } from '~/utils/interface';
